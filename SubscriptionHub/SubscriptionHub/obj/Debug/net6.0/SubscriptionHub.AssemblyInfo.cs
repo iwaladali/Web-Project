@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SubscriptionHub")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fe80b58cc850c9552fb64ba68c1e69badf4e3e85")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd985f370c10f36e000cff95bec69b7043528c8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SubscriptionHub")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SubscriptionHub")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
