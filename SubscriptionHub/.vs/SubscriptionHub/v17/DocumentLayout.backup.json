@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|c:\\users\\ibrahim\\desktop\\web-project\\subscriptionhub\\subscriptionhub\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|solutionrelative:subscriptionhub\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|c:\\users\\ibrahim\\desktop\\web-project\\subscriptionhub\\subscriptionhub\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|solutionrelative:subscriptionhub\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|c:\\users\\ibrahim\\desktop\\web-project\\subscriptionhub\\subscriptionhub\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|solutionrelative:subscriptionhub\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|c:\\users\\ibrahim\\desktop\\web-project\\subscriptionhub\\subscriptionhub\\models\\subscription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|solutionrelative:subscriptionhub\\models\\subscription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|c:\\users\\ibrahim\\desktop\\web-project\\subscriptionhub\\subscriptionhub\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F85C3AA0-0259-4FC7-8ACF-3503D2996228}|SubscriptionHub\\SubscriptionHub.csproj|solutionrelative:subscriptionhub\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\appsettings.json",
+              "RelativeDocumentMoniker": "SubscriptionHub\\appsettings.json",
+              "ToolTip": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\appsettings.json*",
+              "RelativeToolTip": "SubscriptionHub\\appsettings.json*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAADEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-01T14:26:26.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Subscription.cs",
+              "DocumentMoniker": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\Models\\Subscription.cs",
+              "RelativeDocumentMoniker": "SubscriptionHub\\Models\\Subscription.cs",
+              "ToolTip": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\Models\\Subscription.cs*",
+              "RelativeToolTip": "SubscriptionHub\\Models\\Subscription.cs*",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T14:16:04.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Service.cs",
+              "DocumentMoniker": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\Models\\Service.cs",
+              "RelativeDocumentMoniker": "SubscriptionHub\\Models\\Service.cs",
+              "ToolTip": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\Models\\Service.cs*",
+              "RelativeToolTip": "SubscriptionHub\\Models\\Service.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T14:15:49.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "SubscriptionHub\\Models\\Category.cs",
+              "ToolTip": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\Models\\Category.cs*",
+              "RelativeToolTip": "SubscriptionHub\\Models\\Category.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T14:15:38.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\Models\\User.cs",
+              "RelativeDocumentMoniker": "SubscriptionHub\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\ibrahim\\Desktop\\Web-project\\SubscriptionHub\\SubscriptionHub\\Models\\User.cs*",
+              "RelativeToolTip": "SubscriptionHub\\Models\\User.cs*",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAABcAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T05:35:48.297Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
