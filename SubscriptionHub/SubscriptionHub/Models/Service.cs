@@ -23,6 +23,7 @@ namespace SubscriptionHub.Models
         
         public int CategoryID { get; set; }
         [ForeignKey(nameof(CategoryID))]
+
         public Category Category { get; set; } = null!;
 
         

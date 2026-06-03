@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 using SubscriptionHub.Models;
 
+//Service Details
 
 namespace SubscriptionHub.Data
 {
@@ -11,6 +12,7 @@ namespace SubscriptionHub.Data
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<Service> Services => Set<Service>();
         public DbSet<Subscription> Subscriptions => Set<Subscription>();
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):
             base(options) { 
         }

@@ -21,6 +21,11 @@ namespace SubscriptionHub.Models
         [Required]
         public string Password { get; set; } = string.Empty;
 
+        [Required]
+        public bool isAdmin { get; set; }
+
+
+
       
         public List<Subscription> Subscriptions { get; set; } = null!;
     }
