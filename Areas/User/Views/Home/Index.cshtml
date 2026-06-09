@@ -1,0 +1,248 @@
+﻿@model IEnumerable<SubscriptionHub.Models.Service>
+@using SubscriptionHub.Models
+
+@{
+    ViewData["Title"] = "Home";
+    var categories = ViewData["Categories"] as List<Category> ?? new List<Category>();
+}
+
+<style>
+    body {
+        background: #f7f4ff;
+    }
+
+    .category-section,
+    .services-section {
+        background: #ffffff;
+        border-radius: 28px;
+        padding: 45px 30px;
+        margin-bottom: 40px;
+    }
+
+    .category-card,
+    .service-card {
+        background: #fbfaff;
+        border: 1px solid #e6ddff !important;
+        transition: 0.3s;
+    }
+
+        .category-card:hover,
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(98, 80, 200, 0.16) !important;
+        }
+
+    .home-hero {
+        background: linear-gradient(135deg, #f5f0ff, #eef6ff);
+        border-radius: 30px;
+        padding: 60px 50px;
+    }
+
+    .soft-card {
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 22px;
+        box-shadow: 0 12px 35px rgba(98, 80, 200, 0.12);
+    }
+
+    .section-bg {
+        background: #faf8ff;
+        border-radius: 28px;
+        padding: 45px 30px;
+    }
+</style>
+
+<section class="home-hero my-4">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <span class="badge bg-light text-primary mb-3">
+                All your subscriptions in one place
+            </span>
+
+            <h1 class="display-5 fw-bold">
+                Manage Your Subscriptions Easily
+            </h1>
+
+            <p class="lead text-muted mt-3">
+                Track, manage, and discover your favorite subscription services in one simple platform.
+            </p>
+
+            <div class="mt-4">
+                <a asp-area="User" asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg me-2">
+                    Get Started
+                </a>
+
+                <a asp-area="User" asp-controller="Service" asp-action="Index" class="btn btn-outline-primary btn-lg">
+                    Browse Services
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-5 mt-md-0">
+            <div class="soft-card p-4">
+                <h5 class="fw-bold mb-4">Popular Subscriptions</h5>
+
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var service in Model.Take(3))
+                    {
+                        <div class="d-flex justify-content-between border-bottom py-2">
+                            <span>@service.Name</span>
+                            <span class="text-primary">$@service.Price</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-muted mb-0">No subscriptions available yet.</p>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <h2 class="text-center fw-bold mb-4">Explore by Categories</h2>
+
+    <div class="row">
+        @if (categories != null && categories.Any())
+        {
+            foreach (var category in categories)
+            {
+                var icon = "📦";
+
+                switch (category.Name)
+                {
+                    case "Entertainment":
+                        icon = "🎬";
+                        break;
+
+                    case "Education":
+                        icon = "🎓";
+                        break;
+
+                    case "Gaming":
+                        icon = "🎮";
+                        break;
+
+                    case "Productivity":
+                        icon = "📈";
+                        break;
+
+                    case "Music":
+                        icon = "🎵";
+                        break;
+
+                    case "Movies":
+                        icon = "🎥";
+                        break;
+
+                    case "Books":
+                        icon = "📚";
+                        break;
+
+                    case "Business":
+                        icon = "💼";
+                        break;
+
+                    case "Health":
+                        icon = "🏥";
+                        break;
+
+                    default:
+                        icon = "📦";
+                        break;
+                }
+
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm border-0 rounded-4 text-center h-100">
+                        <div class="card-body">
+                            <div class="fs-1 mb-2">@icon</div>
+                            <h5 class="fw-bold">@category.Name</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-center text-muted">No categories available yet.</p>
+        }
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Popular Services</h2>
+
+        <a asp-area="User" asp-controller="Service" asp-action="Index" class="text-decoration-none">
+            View all services →
+        </a>
+    </div>
+
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var service in Model.Take(6))
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-0 rounded-4 h-100">
+                        <div class="card-body">
+                            <h5 class="fw-bold">@service.Name</h5>
+
+                            <p class="text-muted">
+                                @service.Description
+                            </p>
+
+                            <p class="fw-bold text-primary fs-5">
+                                $@service.Price / month
+                            </p>
+
+                            <p class="text-muted">
+                                Duration: @service.Duration days
+                            </p>
+
+                            <a asp-area="User"
+                               asp-controller="Service"
+                               asp-action="Details"
+                               asp-route-id="@service.ServiceID"
+                               class="btn btn-outline-primary w-100">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-center text-muted">No services available yet.</p>
+        }
+    </div>
+</section>
+
+<section class="py-5 bg-light rounded-4 mb-5">
+    <h2 class="text-center fw-bold mb-4">Why Choose SubscriptionHub?</h2>
+
+    <div class="row text-center">
+        <div class="col-md-3 mb-3">
+            <h5>🔐 Secure</h5>
+            <p class="text-muted">Your data is protected.</p>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <h5>⚡ Easy</h5>
+            <p class="text-muted">Manage everything quickly.</p>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <h5>📊 Organized</h5>
+            <p class="text-muted">Track all services clearly.</p>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <h5>🔔 Helpful</h5>
+            <p class="text-muted">Never miss your subscriptions.</p>
+        </div>
+    </div>
+</section>

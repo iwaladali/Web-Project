@@ -1,0 +1,156 @@
+﻿@{
+    var isLoggedIn = true;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SubscriptionHub</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SubscriptionHub.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+
+                <a class="navbar-brand"
+                   asp-area="User"
+                   asp-controller="Home"
+                   asp-action="Index">
+                    SubscriptionHub
+                </a>
+
+                <div class="navbar-collapse d-sm-inline-flex justify-content-between">
+
+                    <ul class="navbar-nav flex-grow-1">
+
+                        @if (isLoggedIn)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"
+                                   asp-area="User"
+                                   asp-controller="Dashboard"
+                                   asp-action="Index">
+                                    Home
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"
+                                   asp-area="User"
+                                   asp-controller="Home"
+                                   asp-action="Index">
+                                    Home
+                                </a>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                               asp-area="User"
+                               asp-controller="Service"
+                               asp-action="Index">
+                                Services
+                            </a>
+                        </li>
+
+                        @if (isLoggedIn)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"
+                                   asp-area="User"
+                                   asp-controller="Subscription"
+                                   asp-action="MySubscriptions">
+                                    My Subscriptions
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"
+                                   asp-area="User"
+                                   asp-controller="Account"
+                                   asp-action="Profile">
+                                    Profile
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        @if (!isLoggedIn)
+                        {
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-primary"
+                                   asp-area="User"
+                                   asp-controller="Account"
+                                   asp-action="Login">
+                                    Login
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-primary"
+                                   asp-area="User"
+                                   asp-controller="Account"
+                                   asp-action="Register">
+                                    Register
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-outline-danger"
+                                   asp-area="User"
+                                   asp-controller="Account"
+                                   asp-action="Login">
+                                    Logout
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="mt-5 py-5 text-center" style="background:#f7f4ff; border-top:1px solid #e6ddff;">
+        <div class="container">
+            <h4 class="fw-bold text-primary mb-3">SubscriptionHub</h4>
+
+            <p class="text-muted mb-4">
+                Manage all your subscriptions in one simple platform.
+            </p>
+
+            <div class="d-flex justify-content-center gap-4 mb-4 flex-wrap">
+                <div>📧 support@subscriptionhub.com</div>
+                <div>📞 +970 599 123 456</div>
+            </div>
+
+            <small class="text-muted">
+                © 2026 SubscriptionHub. All Rights Reserved.
+            </small>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

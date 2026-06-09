@@ -1,0 +1,152 @@
+﻿@model IEnumerable<SubscriptionHub.Models.Service>
+@using SubscriptionHub.Models
+
+@{
+    ViewData["Title"] = "Services";
+
+    var categories = ViewData["Categories"] as List<Category> ?? new List<Category>();
+}
+
+<style>
+    .filter-card {
+        background: white;
+        border-radius: 24px;
+        border: 1px solid #e6ddff;
+        box-shadow: 0 12px 30px rgba(98, 80, 200, 0.10);
+    }
+
+    .service-card {
+        background: white;
+        border-radius: 24px;
+        border: 1px solid #e6ddff;
+        box-shadow: 0 12px 30px rgba(98, 80, 200, 0.10);
+        transition: 0.3s;
+    }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+    body {
+        background: #f7f4ff;
+    }
+</style>
+
+<div class="container py-5">
+
+    <h2 class="fw-bold text-center mb-2">
+        Explore Services
+    </h2>
+
+    <p class="text-center text-muted mb-5">
+        Search and filter subscription services
+    </p>
+
+    <div class="filter-card p-4 mb-5">
+
+        <form method="get">
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Search</label>
+                    <input type="text"
+                           name="search"
+                           class="form-control"
+                           placeholder="Search service name..." />
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Category</label>
+
+                    <select name="categoryId" class="form-select">
+                        <option value="">All Categories</option>
+
+                        @foreach (var category in categories)
+                        {
+                            <option value="@category.CategoryID">
+                                @category.Name
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Min Price</label>
+
+                    <input type="number"
+                           class="form-control"
+                           name="minPrice" />
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Max Price</label>
+
+                    <input type="number"
+                           class="form-control"
+                           name="maxPrice" />
+                </div>
+
+                <div class="col-md-1 d-flex align-items-end">
+                    <button class="btn btn-primary w-100">
+                        Search
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="row">
+
+        @if (Model != null && Model.Any())
+        {
+            foreach (var service in Model)
+            {
+                <div class="col-md-4 mb-4">
+
+                    <div class="service-card p-4 h-100">
+
+                        <h5 class="fw-bold">
+                            @service.Name
+                        </h5>
+
+                        <p class="text-muted">
+                            @service.Description
+                        </p>
+
+                        <p class="text-primary fw-bold fs-5">
+                            $@service.Price
+                        </p>
+
+                        <p class="text-muted">
+                            Duration: @service.Duration days
+                        </p>
+
+                        <a asp-area="User"
+                           asp-controller="Service"
+                           asp-action="Details"
+                           asp-route-id="@service.ServiceID"
+                           class="btn btn-outline-primary w-100">
+                            View Details
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-center">
+                <p class="text-muted">
+                    No services found.
+                </p>
+            </div>
+        }
+
+    </div>
+
+</div>
