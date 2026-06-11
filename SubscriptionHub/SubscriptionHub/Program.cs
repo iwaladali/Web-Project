@@ -10,6 +10,8 @@ namespace SubscriptionHub
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSession();
             builder.Services.AddControllersWithViews();
 
             //builder.Services.AddDbContext<ApplicationDbContext>(
@@ -37,6 +39,7 @@ namespace SubscriptionHub
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
