@@ -1,0 +1,146 @@
+﻿﻿@{
+ViewData["Title"] = "Dashboard";
+}
+
+<style>
+    body {
+        background: #f7f4ff;
+    }
+
+    .dashboard-hero,
+    .dash-card,
+    .recent-card {
+        background: white;
+        border-radius: 24px;
+        border: 1px solid #e6ddff;
+        box-shadow: 0 12px 30px rgba(98, 80, 200, 0.10);
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: #f0eaff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+</style>
+
+<div class="container py-5">
+
+    <div class="dashboard-hero p-5 mb-4">
+        <h2 class="fw-bold mb-2">Welcome Back, Sara 👋</h2>
+        <p class="text-muted mb-0">
+            Here is a quick overview of your subscriptions.
+        </p>
+    </div>
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-3">
+            <div class="dash-card p-4 h-100">
+                <div class="stat-icon mb-3">📦</div>
+                <small class="text-muted">Total Subscriptions</small>
+                <h3 class="fw-bold mt-2">7</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="dash-card p-4 h-100">
+                <div class="stat-icon mb-3">✅</div>
+                <small class="text-muted">Active</small>
+                <h3 class="fw-bold mt-2 text-success">4</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="dash-card p-4 h-100">
+                <div class="stat-icon mb-3">⏳</div>
+                <small class="text-muted">Expired</small>
+                <h3 class="fw-bold mt-2 text-secondary">2</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="dash-card p-4 h-100">
+                <div class="stat-icon mb-3">❌</div>
+                <small class="text-muted">Cancelled</small>
+                <h3 class="fw-bold mt-2 text-danger">1</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-8">
+            <div class="recent-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0">Recent Subscriptions</h5>
+
+                    <a asp-area="User"
+                       asp-controller="Subscription"
+                       asp-action="MySubscriptions"
+                       class="text-decoration-none">
+                        View All →
+                    </a>
+                </div>
+
+                <div class="border-bottom py-3 d-flex justify-content-between">
+                    <div>
+                        <h6 class="fw-bold mb-1">Netflix</h6>
+                        <small class="text-muted">Entertainment • Ends on 2026-07-01</small>
+                    </div>
+                    <span class="badge bg-success align-self-center">Active</span>
+                </div>
+
+                <div class="border-bottom py-3 d-flex justify-content-between">
+                    <div>
+                        <h6 class="fw-bold mb-1">Coursera</h6>
+                        <small class="text-muted">Education • Ends on 2026-05-15</small>
+                    </div>
+                    <span class="badge bg-secondary align-self-center">Expired</span>
+                </div>
+
+                <div class="py-3 d-flex justify-content-between">
+                    <div>
+                        <h6 class="fw-bold mb-1">Canva Pro</h6>
+                        <small class="text-muted">Productivity • Ends on 2026-07-05</small>
+                    </div>
+                    <span class="badge bg-success align-self-center">Active</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="recent-card p-4 mb-4">
+                <h5 class="fw-bold mb-3">Quick Actions</h5>
+
+                <a asp-area="User"
+                   asp-controller="Service"
+                   asp-action="Index"
+                   class="btn btn-primary w-100 mb-2">
+                    Browse Services
+                </a>
+
+                <a asp-area="User"
+                   asp-controller="Subscription"
+                   asp-action="MySubscriptions"
+                   class="btn btn-outline-primary w-100">
+                    Manage Subscriptions
+                </a>
+            </div>
+
+            <div class="recent-card p-4">
+                <h5 class="fw-bold mb-3">Reminder</h5>
+                <p class="text-muted mb-0">
+                    You have subscriptions that may need renewal soon.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
