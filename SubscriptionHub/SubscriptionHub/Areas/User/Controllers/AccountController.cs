@@ -19,6 +19,7 @@ namespace SubscriptionHub.Areas.User.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Login(LoginRequest req)
         {
@@ -35,8 +36,8 @@ namespace SubscriptionHub.Areas.User.Controllers
 
             HttpContext.Session.SetInt32("ID", user.UserID);
 
-            //return RedirectToAction("Index", "Dashboard");
-            return RedirectToAction("Profile");
+            return RedirectToAction("Index", "Dashboard");
+            //return RedirectToAction("Profile");
             
         }
         [HttpGet]
@@ -66,6 +67,37 @@ namespace SubscriptionHub.Areas.User.Controllers
             _context.SaveChanges();
 
            return RedirectToAction("Login");
+        }
+        public IActionResult UpdateProfile(UpdateProfile req)
+        {
+            var user_id = HttpContext.Session.GetInt32("ID");
+            if (user_id == null)
+                return RedirectToAction("Login");
+
+            var user = _context.Users.Find(user_id);
+            user.FirstName= req.FirstName;
+            user.LastName= req.LastName;
+            user.Email = req.Email;
+            _context.SaveChanges();
+
+            return RedirectToAction("Profile");
+        }
+        public IActionResult ChangePassword(ChangePassword req)
+        {
+            var user_id = HttpContext.Session.GetInt32("ID");
+            if (user_id == null)
+                return RedirectToAction("Login");
+
+            var user = _context.Users.Find(user_id);
+
+            if(user.Password != req.CurrentPassword || req.NewPassword != req.ConfirmPassword)
+            return RedirectToAction("Profile");
+
+            user.Password = req.NewPassword;
+            _context.SaveChanges();
+
+            //return RedirectToAction("Profile");
+            return RedirectToAction("Index", "Dashboard");
         }
         [HttpGet]
         public IActionResult Profile()
