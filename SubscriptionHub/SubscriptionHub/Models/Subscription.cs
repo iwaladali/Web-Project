@@ -8,7 +8,7 @@ namespace SubscriptionHub.Models
         [Key]
         public int SubscriptionID { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTime  StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
         [Required]

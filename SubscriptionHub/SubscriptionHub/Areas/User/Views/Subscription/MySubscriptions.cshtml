@@ -1,0 +1,224 @@
+﻿@model IEnumerable<SubscriptionHub.Models.Subscription>
+@using SubscriptionHub.Models
+
+@{
+    ViewData["Title"] = "My Subscriptions";
+    var categories = ViewData["Categories"] as List<Category> ?? new List<Category>();
+}
+
+<style>
+    body {
+        background: #f7f4ff;
+    }
+
+    .filter-card, .sub-card {
+        background: white;
+        border-radius: 24px;
+        border: 1px solid #e6ddff;
+        box-shadow: 0 12px 30px rgba(98, 80, 200, 0.10);
+    }
+
+    .status-badge {
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+</style>
+
+<div class="container py-5">
+
+    <h2 class="fw-bold text-center mb-2">My Subscriptions</h2>
+    <p class="text-muted text-center mb-5">
+        Search, manage, renew, or cancel your subscriptions
+    </p>
+
+    <div class="filter-card p-4 mb-5">
+        <form method="get">
+            <div class="row">
+
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Search</label>
+                    <input type="text" name="search" class="form-control" placeholder="Service name..." />
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Category</label>
+                    <select name="categoryId" class="form-select">
+                        <option value="">All Categories</option>
+                        @foreach (var category in categories)
+                        {
+                            <option value="@category.CategoryID">@category.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Status</label>
+                    <select name="status" class="form-select">
+                        <option value="">All</option>
+                        <option value="Active">Active</option>
+                        <option value="Expired">Expired</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+          
+
+                <div class="col-md-2 d-flex align-items-end mb-3">
+                    <button class="btn btn-primary w-100">Search</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var sub in Model)
+        {
+            var badgeClass = sub.Status == "Active" ? "bg-success text-white"
+                           : sub.Status == "Expired" ? "bg-secondary text-white"
+                           : "bg-danger text-white";
+
+            <div class="sub-card p-4 mb-4">
+
+                <div class="d-flex justify-content-between align-items-start flex-wrap">
+                    <div>
+                        <h4 class="fw-bold mb-2">@sub.Service.Name</h4>
+                        <p class="text-muted mb-1">@sub.Service.Description</p>
+                        <span class="badge bg-primary">@sub.Service.Category?.Name</span>
+                    </div>
+
+                    <span class="status-badge @badgeClass">
+                        @sub.Status
+                    </span>
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <small class="text-muted">Price</small>
+                        <p class="fw-bold">$@sub.Service.Price</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small class="text-muted">Start Date</small>
+                        <p class="fw-bold">@sub.StartDate.ToString("yyyy-MM-dd")</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small class="text-muted">End Date</small>
+                        <p class="fw-bold">
+                            @(sub.EndDate.HasValue ? sub.EndDate.Value.ToString("yyyy-MM-dd") : "Not set")
+                        </p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small class="text-muted">Duration</small>
+                        <p class="fw-bold">@sub.Service.Duration days</p>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2 flex-wrap mt-3">
+
+                    <button type="button"
+                            class="btn btn-outline-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#renewModal-@sub.SubscriptionID">
+                        Renew
+                    </button>
+
+                    @if (sub.Status == "Active")
+                    {
+                        <button type="button"
+                                class="btn btn-outline-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#cancelModal-@sub.SubscriptionID">
+                            Cancel
+                        </button>
+                    }
+
+                </div>
+            </div>
+
+            <div class="modal fade" id="renewModal-@sub.SubscriptionID" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-4">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-bold">Renew Subscription</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <form asp-area="User" asp-controller="Subscription" asp-action="Renew" method="post">
+                            <div class="modal-body">
+                                <input type="hidden" name="subscriptionId" value="@sub.SubscriptionID" />
+
+                                <p>Do you want to renew this subscription?</p>
+
+                                <div class="p-3 bg-light rounded-3 mb-2">
+                                    <strong>Service:</strong> @sub.Service.Name
+                                </div>
+
+                                <div class="p-3 bg-light rounded-3 mb-2">
+                                    <strong>Price:</strong> $@sub.Service.Price
+                                </div>
+
+                                <div class="p-3 bg-light rounded-3">
+                                    <strong>Duration:</strong> @sub.Service.Duration days
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Confirm Renewal</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="cancelModal-@sub.SubscriptionID" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-4">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-bold">Cancel Subscription</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <form asp-area="User" asp-controller="Subscription" asp-action="Cancel" method="post">
+                            <div class="modal-body">
+                                <input type="hidden" name="subscriptionId" value="@sub.SubscriptionID" />
+
+                                <p class="text-muted">
+                                    Are you sure you want to cancel this subscription?
+                                </p>
+
+                                <div class="p-3 bg-light rounded-3">
+                                    <strong>Service:</strong> @sub.Service.Name
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger">Confirm Cancel</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center text-muted">
+            No subscriptions found.
+        </div>
+    }
+
+</div>
