@@ -1,0 +1,93 @@
+﻿@model IEnumerable<SubscriptionHub.Models.User>
+
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<style>
+    body {
+        background: #f7f4ff;
+    }
+
+    .manage-card {
+        background: white;
+        border-radius: 24px;
+        border: 1px solid #e6ddff;
+        box-shadow: 0 12px 30px rgba(98, 80, 200, 0.10);
+    }
+
+    .table thead {
+        background: #f0eaff;
+    }
+
+    .action-btn {
+        border-radius: 12px;
+    }
+</style>
+
+<div class="container py-5">
+
+    <h2 class="fw-bold text-center mb-2">
+        Manage Users
+    </h2>
+
+    <p class="text-center text-muted mb-5">
+        View and delete registered users
+    </p>
+
+    <div class="manage-card p-4">
+
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                       
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var user in Model)
+                        {
+                            <tr>
+                               
+
+                                <td>
+                                    @user.FirstName @user.LastName
+                                </td>
+
+                                <td>
+                                    @user.Email
+                                </td>
+
+                                <td class="text-center">
+                                    <a asp-area="Admin"
+                                       asp-controller="Manage"
+                                       asp-action="DeleteUser"
+                                       asp-route-id="@user.UserID"
+                                       class="btn btn-outline-danger btn-sm action-btn">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">
+                                No users found.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

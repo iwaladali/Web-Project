@@ -1,0 +1,164 @@
+﻿@model IEnumerable<SubscriptionHub.Models.Subscription>
+@using SubscriptionHub.Models
+
+@{
+    ViewData["Title"] = "Manage Subscriptions";
+    var services = ViewBag.Services as List<Service> ?? new List<Service>();
+}
+
+<style>
+    body {
+        background: #f7f4ff;
+    }
+
+    .manage-card {
+        background: white;
+        border-radius: 24px;
+        border: 1px solid #e6ddff;
+        box-shadow: 0 12px 30px rgba(98, 80, 200, 0.10);
+    }
+
+    .table thead {
+        background: #f0eaff;
+    }
+
+    .action-btn {
+        border-radius: 12px;
+    }
+</style>
+
+<div class="container py-5">
+
+    
+    <h2 class="fw-bold text-center mb-2">
+        Manage Subscriptions
+    </h2>
+
+    <p class="text-center text-muted mb-5">
+        Remove subscriptions related to a selected service
+    </p>
+
+    <div class="manage-card p-4 mb-5">
+        <form asp-area="Admin"
+              asp-controller="Manage"
+              asp-action="RemoveSubscriptionsByService"
+              method="post">
+
+            <div class="row align-items-end">
+
+                <div class="col-md-9 mb-3">
+                    <label class="form-label">Select Service</label>
+
+                    <select name="serviceId" class="form-select" required>
+                        <option value="">Choose service...</option>
+
+                        @foreach (var service in services)
+                        {
+                            <option value="@service.ServiceID">
+                                @service.Name
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <button type="submit"
+                            class="btn btn-outline-danger w-100 action-btn">
+                        Remove Subscriptions
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var userGroup in Model.GroupBy(s => s.UserID))
+        {
+            var firstSub = userGroup.First();
+
+            <div class="manage-card p-4 mb-4">
+
+                <h4 class="fw-bold mb-3">
+                    @(firstSub.User.FirstName + " " + firstSub.User.LastName)
+                </h4>
+
+                <div class="table-responsive">
+
+                    <table class="table align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var sub in userGroup)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @sub.Service.Name
+                                    </td>
+
+                                    <td>
+                                        @sub.StartDate.ToShortDateString()
+                                    </td>
+
+                                    <td>
+                                        @sub.EndDate?.ToShortDateString()
+                                    </td>
+
+                                    <td>
+
+                                        @if (sub.Status == "Active")
+                                        {
+                                            <span class="badge bg-success">
+                                                Active
+                                            </span>
+                                        }
+                                        else if (sub.Status == "Expired")
+                                        {
+                                            <span class="badge bg-secondary">
+                                                Expired
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                @sub.Status
+                                            </span>
+                                        }
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <div class="manage-card p-4 text-center">
+            <p class="text-muted mb-0">
+                No subscriptions found.
+            </p>
+        </div>
+    }
+    
+
+</div>
