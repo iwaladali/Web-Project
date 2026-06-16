@@ -1,4 +1,5 @@
-﻿﻿@{
+﻿@model User
+@{
 ViewData["Title"] = "Dashboard";
 }
 
@@ -31,7 +32,7 @@ ViewData["Title"] = "Dashboard";
 <div class="container py-5">
 
     <div class="dashboard-hero p-5 mb-4">
-        <h2 class="fw-bold mb-2">Welcome Back, Sara 👋</h2>
+        <h2 class="fw-bold mb-2">Welcome Back, @Model.FirstName 👋</h2>
         <p class="text-muted mb-0">
             Here is a quick overview of your subscriptions.
         </p>
@@ -43,15 +44,32 @@ ViewData["Title"] = "Dashboard";
             <div class="dash-card p-4 h-100">
                 <div class="stat-icon mb-3">📦</div>
                 <small class="text-muted">Total Subscriptions</small>
-                <h3 class="fw-bold mt-2">7</h3>
+                <h3 class="fw-bold mt-2">@Model.Subscriptions.Count</h3>
             </div>
         </div>
+        @{
+            int countActive = 0;
+            int countExp = 0;
+            int countCancle = 0;
+            foreach (var sub in Model.Subscriptions)
+            {
+                if ((sub.Status == "Active"))
+                    countActive++;
 
+                if ((sub.Status == "Expired"))
+                    countExp++;
+
+                if ((sub.Status == "Cancelled"))
+                    countCancle++;
+
+            }
+
+        }
         <div class="col-md-3">
             <div class="dash-card p-4 h-100">
                 <div class="stat-icon mb-3">✅</div>
                 <small class="text-muted">Active</small>
-                <h3 class="fw-bold mt-2 text-success">4</h3>
+                <h3 class="fw-bold mt-2 text-success">@countActive</h3>
             </div>
         </div>
 
@@ -59,7 +77,7 @@ ViewData["Title"] = "Dashboard";
             <div class="dash-card p-4 h-100">
                 <div class="stat-icon mb-3">⏳</div>
                 <small class="text-muted">Expired</small>
-                <h3 class="fw-bold mt-2 text-secondary">2</h3>
+                <h3 class="fw-bold mt-2 text-secondary">@countExp</h3>
             </div>
         </div>
 
@@ -67,7 +85,7 @@ ViewData["Title"] = "Dashboard";
             <div class="dash-card p-4 h-100">
                 <div class="stat-icon mb-3">❌</div>
                 <small class="text-muted">Cancelled</small>
-                <h3 class="fw-bold mt-2 text-danger">1</h3>
+                <h3 class="fw-bold mt-2 text-danger">@countCancle</h3>
             </div>
         </div>
 
@@ -87,32 +105,46 @@ ViewData["Title"] = "Dashboard";
                         View All →
                     </a>
                 </div>
+                @{
+                int count=0;
+                }
+                @foreach(var sub in Model.Subscriptions)
+                {
+                    <div class="border-bottom py-3 d-flex justify-content-between">
+                        <div>
+                            <h6 class="fw-bold mb-1">@sub.Service.Name</h6>
+                            <small class="text-muted">Entertainment • Ends on @sub.EndDate </small>
+                        </div>
 
-                <div class="border-bottom py-3 d-flex justify-content-between">
-                    <div>
-                        <h6 class="fw-bold mb-1">Netflix</h6>
-                        <small class="text-muted">Entertainment • Ends on 2026-07-01</small>
-                    </div>
-                    <span class="badge bg-success align-self-center">Active</span>
-                </div>
+                        @if ((sub.Status == "Active"))
+                        {
+                        <span class="badge bg-success align-self-center">Active</span>
+                            
+                        }
 
-                <div class="border-bottom py-3 d-flex justify-content-between">
-                    <div>
-                        <h6 class="fw-bold mb-1">Coursera</h6>
-                        <small class="text-muted">Education • Ends on 2026-05-15</small>
-                    </div>
-                    <span class="badge bg-secondary align-self-center">Expired</span>
-                </div>
+                            @if ((sub.Status == "Expired"))
+                            {
+                                
+                        <span class="badge bg-secondary align-self-center">Expired</span>
+                            }
 
-                <div class="py-3 d-flex justify-content-between">
-                    <div>
-                        <h6 class="fw-bold mb-1">Canva Pro</h6>
-                        <small class="text-muted">Productivity • Ends on 2026-07-05</small>
+                        @if ((sub.Status == "Cancel"))
+                        {
+                            <span class="badge bg-danger align-self-center">Cancelled</span>
+                            
+                        }
+
                     </div>
-                    <span class="badge bg-success align-self-center">Active</span>
-                </div>
+                    count++;
+                    if (count == 3)
+                        break;
+                }
+
+           
+
             </div>
         </div>
+
 
         <div class="col-md-4">
             <div class="recent-card p-4 mb-4">

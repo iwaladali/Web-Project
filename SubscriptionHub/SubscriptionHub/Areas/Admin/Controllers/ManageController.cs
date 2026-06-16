@@ -15,6 +15,13 @@ namespace SubscriptionHub.Areas.Admin.Controllers
             _context = context;
         }
 
+        public IActionResult DeleteUser(int id)
+        {
+            _context.Users.Remove(_context.Users.Find(id));
+            _context.SaveChanges();
+            return RedirectToAction("ManageUsers", "Manage");
+
+        }
         public IActionResult ManageUsers()
         {
             var users = _context.Users.ToList();

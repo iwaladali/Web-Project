@@ -45,7 +45,7 @@ namespace SubscriptionHub
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=admin}/{controller=Home}/{action=Index}/{id?}");
+                pattern: "{area=user}/{controller=Account}/{action=Profile}/{id?}");
 
             app.Run();
         }
