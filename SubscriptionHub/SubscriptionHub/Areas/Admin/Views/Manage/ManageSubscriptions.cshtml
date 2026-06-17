@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SubscriptionHub.Models.Subscription>
+﻿@model IEnumerable<SubscriptionHub.Models.User>
 @using SubscriptionHub.Models
 
 @{
@@ -75,14 +75,14 @@
 
     @if (Model != null && Model.Any())
     {
-        @foreach (var userGroup in Model.GroupBy(s => s.UserID))
+        @foreach (var userGroup in Model)
         {
-            var firstSub = userGroup.First();
+            var firstSub = userGroup;
 
             <div class="manage-card p-4 mb-4">
 
                 <h4 class="fw-bold mb-3">
-                    @(firstSub.User.FirstName + " " + firstSub.User.LastName)
+                    @(firstSub.FirstName + " " + firstSub.LastName)
                 </h4>
 
                 <div class="table-responsive">
@@ -100,11 +100,12 @@
 
                         <tbody>
 
-                            @foreach (var sub in userGroup)
+                            @foreach (var sub in userGroup.Subscriptions)
                             {
                                 <tr>
 
                                     <td>
+                                        
                                         @sub.Service.Name
                                     </td>
 
