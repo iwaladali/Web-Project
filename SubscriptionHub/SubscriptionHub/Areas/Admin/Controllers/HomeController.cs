@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SubscriptionHub.Data;
 using SubscriptionHub.Models;
 using System.Diagnostics;
 
@@ -9,6 +10,14 @@ namespace SubscriptionHub.Areas.Admin.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        private readonly ApplicationDbContext _context;
+        
+        
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        {
+            _logger = logger;
+            _context=context;
+        }
         public IActionResult Index()
         {
             var user_id = HttpContext.Session.GetInt32("ID");
@@ -17,13 +26,13 @@ namespace SubscriptionHub.Areas.Admin.Controllers
                 {
                     area="User"
                 });
+            ViewBag.UsersCount = _context.Users.ToList().Count;
+            ViewBag.ServicesCount = _context.Services.ToList().Count;
+            ViewBag.CategoriesCount = _context.Categories.ToList().Count;
+            ViewBag.SubscriptionsCount = _context.Subscriptions.ToList().Count;
             return View();
         }
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Privacy()
         {
