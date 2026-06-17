@@ -17,6 +17,7 @@ namespace SubscriptionHub.Areas.User.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+
             return View();
         }
 
@@ -35,6 +36,9 @@ namespace SubscriptionHub.Areas.User.Controllers
                 return View(req);
 
             HttpContext.Session.SetInt32("ID", user.UserID);
+
+            if(user.isAdmin || user.Email == "admin@gmail.com")
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
 
             return RedirectToAction("Index", "Dashboard");
             //return RedirectToAction("Profile");

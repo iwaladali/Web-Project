@@ -11,6 +11,12 @@ namespace SubscriptionHub.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            var user_id = HttpContext.Session.GetInt32("ID");
+            if (user_id == null)
+                return RedirectToAction("Login", "Account", new
+                {
+                    area="User"
+                });
             return View();
         }
 

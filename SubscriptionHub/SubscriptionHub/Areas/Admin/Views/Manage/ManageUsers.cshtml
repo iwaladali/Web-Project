@@ -45,6 +45,7 @@
                         <th>Full Name</th>
                         <th>Email</th>
                         <th class="text-center">Delete</th>
+                        <th class="text-center">IsAdmin</th>
                     </tr>
                 </thead>
 
@@ -71,6 +72,26 @@
                                        asp-route-id="@user.UserID"
                                        class="btn btn-outline-danger btn-sm action-btn">
                                         Delete
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a asp-area="Admin"
+                                       asp-controller="Manage"
+                                       asp-action="MakeUserAdmin"
+                                       asp-route-id="@user.UserID"
+                                       class="btn btn-outline-success btn-sm action-btn">
+                                        @if (!user.isAdmin || user.Email == "admin@gmail.com"){
+                                            <span>Make Admin</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Make User</span>
+                                            
+                                        }
+
+
+                                            
+                                        
                                     </a>
                                 </td>
                             </tr>
